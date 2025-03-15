@@ -18,6 +18,7 @@ Techromancer
 *Overview*
 
 Cypher is a medium-difficulty Linux machine from HackTheBox The machine involves:
+
 -Discovering Java class files on the website and decompiling them.
 
 -Identifying a vulnerable custom function capable of executing a reverse shell.
@@ -86,12 +87,50 @@ OS and Service detection performed. Please report any incorrect results at https
 Nmap done: 1 IP address (1 host up) scanned in 165.36 seconds   
 ```
 -------------------------------------------------------------------------------------------------------
-Web Enumeration...Inspecting the Website
+The website has title “GRAPH ASM” and presents itself as “revolutionary Attack Surface Management solution that harnesses the power of proprietary graph technology to map your organization’s digital landscape.”
 
-The site presents itself as "GRAPH ASM," an attack surface management tool leveraging proprietary graph technology.
+When I looked at the source code, there was a comment that caught my attention. A quote from a potential user “TheFunky1”.
 
-The source code contains a comment mentioning a potential user, TheFunky1.
 
-The login page has a script making POST requests to /api/auth, suggesting an API.
+
+![Pwned Screen](.images/1.png)
+In the source code for login page, I found a script that makes POST request to “/api/auth” endpoint, suggesting there’s an API, which opened doors for more attack vectors.
+
+
+![Pwned Screen](.images/2.png)
+
+I continued with directory fuzzing using Gobuster.
+```bash
+┌──(kali㉿kali)-[~]
+└─$ gobuster dir -u "http://cypher.htb" -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -t 64 
+===============================================================
+Gobuster v3.6
+by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+===============================================================
+[+] Url:                     http://cypher.htb
+[+] Method:                  GET
+[+] Threads:                 64
+[+] Wordlist:                /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt
+[+] Negative Status codes:   404
+[+] User Agent:              gobuster/3.6
+[+] Timeout:                 10s
+===============================================================
+Starting gobuster in directory enumeration mode
+===============================================================
+/index                (Status: 200) [Size: 4562]
+/login                (Status: 200) [Size: 3671]
+/about                (Status: 200) [Size: 4986]
+/demo                 (Status: 307) [Size: 0] [--> /login]
+/api                  (Status: 307) [Size: 0] [--> /api/docs]
+/testing              (Status: 301) [Size: 178] [--> http://cypher.htb/testing/]
+```
+Aside from a few well-known directories, I discovered a "demo" page that redirected me to the "login" page and an "api" page leading to the documentation. However, the "testing" page caught my attention. There, I found a mysterious Java Archive (JAR) file named "custom_apoc_extension," which I quickly downloaded.  
+
+APOC, short for "Awesome Procedures on Cypher," is a library of procedures and functions designed for Neo4j, a widely used graph database. It enhances Neo4j's capabilities by offering a variety of additional features not included in the core database, such as tools for data import/export, graph algorithms, and data transformation. 
+
+![Pwned Screen](.images/3.png)
+
+
+
 
 
