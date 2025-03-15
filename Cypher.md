@@ -18,15 +18,15 @@ Techromancer
 *Overview*
 
 Cypher is a medium-difficulty Linux machine from HackTheBox The machine involves:
-Discovering Java class files on the website and decompiling them.
+-Discovering Java class files on the website and decompiling them.
 
-Identifying a vulnerable custom function capable of executing a reverse shell.
+-Identifying a vulnerable custom function capable of executing a reverse shell.
 
-Exploiting a rare Cypher injection vulnerability in the Neo4j graph database.
+-Exploiting a rare Cypher injection vulnerability in the Neo4j graph database.
 
-Escalating privileges through a misconfigured Bbot recon scanner to retrieve the root flag.
+-Escalating privileges through a misconfigured Bbot recon scanner to retrieve the root flag.
 
-
+-------------------------------------------------------------------------------------------------------
 *Starting with an Nmap scan to identify open ports:*
 Port 22 (SSH): Running OpenSSH 9.6p1 on Ubuntu.
 
@@ -85,6 +85,7 @@ HOP RTT       ADDRESS
 OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .                                                       
 Nmap done: 1 IP address (1 host up) scanned in 165.36 seconds   
 ```
+-------------------------------------------------------------------------------------------------------
 Web Enumeration...Inspecting the Website
 
 The site presents itself as "GRAPH ASM," an attack surface management tool leveraging proprietary graph technology.
