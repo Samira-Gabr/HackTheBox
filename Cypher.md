@@ -2,12 +2,16 @@
 
 Platform :
 Hack the Box
+
 Box :
 Cypher
+
 Difficulty :
 Medium
+
 OS :
 Linux 
+
 Created by: 
 Techromancer
 
@@ -15,14 +19,21 @@ Techromancer
 
 Cypher is a medium-difficulty Linux machine from HackTheBox The machine involves:
 Discovering Java class files on the website and decompiling them.
+
 Identifying a vulnerable custom function capable of executing a reverse shell.
+
 Exploiting a rare Cypher injection vulnerability in the Neo4j graph database.
+
 Escalating privileges through a misconfigured Bbot recon scanner to retrieve the root flag.
+
 
 *Starting with an Nmap scan to identify open ports:*
 Port 22 (SSH): Running OpenSSH 9.6p1 on Ubuntu.
+
 Port 80 (HTTP): Hosting an Nginx 1.24.0 web server.
+
 The website is accessible at http://cypher.htb/, so we add it to /etc/hosts.
+
 ```bash
 ┌──(kali㉿kali)-[~]
 └─$ sudo nmap -Pn -A 10.10.11.57                        
@@ -77,6 +88,9 @@ Nmap done: 1 IP address (1 host up) scanned in 165.36 seconds
 Web Enumeration...Inspecting the Website
 
 The site presents itself as "GRAPH ASM," an attack surface management tool leveraging proprietary graph technology.
+
 The source code contains a comment mentioning a potential user, TheFunky1.
+
 The login page has a script making POST requests to /api/auth, suggesting an API.
+
 
