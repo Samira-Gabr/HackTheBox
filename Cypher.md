@@ -131,6 +131,18 @@ APOC, short for "Awesome Procedures on Cypher," is a library of procedures and f
 ![Pwned3 Screen](.images/3.jpg)
 
 
+Besides that, there were couple Java class files in the Jar archive.
+![Pwned3 Screen](.images/4.jpg)
+
+I used online Java decompiler to decompile and inspect individual files. Looking at the decompiled code of “CustomFunctions.class”, I noticed very familiar string “/bin/sh” being used.
+![Pwned3 Screen](.images/5.jpg)
+There is a custom function/procedure called **"custom.getUrlStatusCode"** that sends an HTTP request to a specified URL and returns the corresponding HTTP status code. It utilizes **"curl"** for the request, which is executed via **"/bin/sh"**, potentially introducing a security risk.  
+
+Moreover, the **"url"** parameter is directly appended to the shell command without any validation, making remote code execution (RCE) possible.
+![Pwned3 Screen](.images/6.jpg)
+
+
+
 
 
 
