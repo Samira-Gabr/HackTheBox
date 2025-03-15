@@ -93,11 +93,11 @@ When I looked at the source code, there was a comment that caught my attention. 
 
 
 
-![Pwned1 Screen](.images/1.png)
+![Pwned1 Screen](.images/1.jpg)
 In the source code for login page, I found a script that makes POST request to “/api/auth” endpoint, suggesting there’s an API, which opened doors for more attack vectors.
 
 
-![Pwned2 Screen](.images/2.png)
+![Pwned2 Screen](.images/2.jpg)
 
 I continued with directory fuzzing using Gobuster.
 ```bash
@@ -128,7 +128,7 @@ Aside from a few well-known directories, I discovered a "demo" page that redirec
 
 APOC, short for "Awesome Procedures on Cypher," is a library of procedures and functions designed for Neo4j, a widely used graph database. It enhances Neo4j's capabilities by offering a variety of additional features not included in the core database, such as tools for data import/export, graph algorithms, and data transformation. 
 
-![Pwned3 Screen](.images/3.png)
+![Pwned3 Screen](.images/3.jpg)
 
 
 
