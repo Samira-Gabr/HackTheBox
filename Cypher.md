@@ -44,22 +44,6 @@ Stats: 0:00:06 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
 SYN Stealth Scan Timing: About 99.99% done; ETC: 03:52 (0:00:00 remaining)
 Stats: 0:00:14 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
 Service scan Timing: About 50.00% done; ETC: 03:52 (0:00:07 remaining)
-Stats: 0:00:15 elapsed; 0 hosts completed (1 up), 1 undergoing Service Scan
-Service scan Timing: About 100.00% done; ETC: 03:52 (0:00:00 remaining)
-Stats: 0:02:09 elapsed; 0 hosts completed (1 up), 1 undergoing Traceroute
-Traceroute Timing: About 32.26% done; ETC: 03:54 (0:00:00 remaining)
-Stats: 0:02:12 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 97.54% done; ETC: 03:54 (0:00:00 remaining)
-Stats: 0:02:12 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 98.60% done; ETC: 03:54 (0:00:00 remaining)
-Stats: 0:02:12 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 98.60% done; ETC: 03:54 (0:00:00 remaining)
-Stats: 0:02:13 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 98.60% done; ETC: 03:54 (0:00:00 remaining)
-Stats: 0:02:39 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 99.65% done; ETC: 03:55 (0:00:00 remaining)
-Stats: 0:02:39 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
-NSE Timing: About 99.65% done; ETC: 03:55 (0:00:00 remaining)
 Stats: 0:02:40 elapsed; 0 hosts completed (1 up), 1 undergoing Script Scan
 NSE Timing: About 99.65% done; ETC: 03:55 (0:00:00 remaining)
 Nmap scan report for cypher.htb (10.10.11.57)
